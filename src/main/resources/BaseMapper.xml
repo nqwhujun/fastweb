@@ -20,7 +20,7 @@
 		UPDATE ${{domain.name}}
 		<set>
 			<if test="name!=null and name!=" ">
-				domain
+				${{domain.name}}
 			</if>
 		</set>
 		WHERE id = #{id}

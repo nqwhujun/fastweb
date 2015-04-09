@@ -9,7 +9,7 @@ import java.sql.Connection;
  */
 public abstract class AbstractFastWeb {
 
-	protected void generator(String javaPackage, Connection connection,
+	protected void generator(String javaPackage, 
 			String webPackage) {
 		connection.
 		
