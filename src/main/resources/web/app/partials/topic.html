@@ -1,0 +1,100 @@
+<div ng-controller="topicListCtrl" class="table-responsive">
+ <div class="col-xs-12 text-center" ng-show="isLoading">
+        <div id="loading" class="loading" style="color: #000000;width: auto">载入中</div>
+    </div>
+ <div class="col-xs-12" ng-hide="hideTable" style="padding-left: 0px;padding-top: 10px">
+        <div class="table-responsive">
+            <div class="dataTables_wrapper" role="grid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="dataTables_length">
+                            <label>
+                                每页显示
+                                <select ng-model="table.selectedRecordPerPage"
+                                        ng-options="rpp for rpp in table.recordPerPageOptions" required></select>
+                                条记录
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="dataTables_filter">
+                            <label>
+                                过滤:
+                                <input type="text" ng-model="table.query"></label>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered table-hover dataTable">
+                    <thead>
+                    <tr>
+                        <td width="10%">序号</td>
+                        <td width="10%">Topic名称</td>
+                        <td width="10%">维护人</td>
+                        <td width="20%">维护组织</td>
+                        <td width="10%">最新Schema版本</td>
+                        <td width="10%">状态</td>
+                        <td width="30%">操作</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="table in table.displayedDataList.slice(table.startIndex-1, table.endIndex)">
+                        <td width="10%">{{$index}}</td>
+                        <td width="10%">{{ table.name}}</td>
+                        <td width="10%">{{ table.person}}</td>
+                        <td width="10%">{{ table.businessUnit}}</td>
+                        <td width="20%">{{ table.lastVersion}}</td>
+                        <td width="10%">{{ table.status}}</td>
+                        <td width="30%">
+                            <a
+                               href="javascript:void(0)"
+                               ng-click="popShowUpload()">
+                               上传
+                            </a>
+                            <a href="#">查看</a>
+                            <a href="#">下载</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="dataTables_info">
+                            展示第{{table.startIndex}}条记录至第{{table.endIndex}}条记录（总计{{table.total}}条记录）
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="dataTables_paginate paging_bootstrap">
+                            <ul class="pagination">
+                                <li class="{{table.getDisableLabelforPrevious()}}">
+                                    <a href="" ng-click="table.gotoFirstPage()">
+                                        <i class="icon-double-angle-left"></i>
+                                    </a>
+                                </li>
+                                <li class="{{table.getDisableLabelforPrevious()}}">
+                                    <a href="" ng-click="table.previousPage()">
+                                        <i class="icon-angle-left"></i>
+                                    </a>
+                                </li>
+                                <li ng-repeat="num in table.getCurrentPageNumDisplay()"
+                                    class="{{table.getActiveLabel(num)}}">
+                                    <a href="" ng-click="table.changePage(num)">{{num}}</a>
+                                </li>
+                                <li class="{{table.getDisableLabelforNext()}}">
+                                    <a href="" ng-click="table.nextPage()">
+                                        <i class="icon-angle-right"></i>
+                                    </a>
+                                </li>
+                                <li class="{{table.getDisableLabelforNext()}}">
+                                    <a href="" ng-click="table.gotoLastPage()">
+                                        <i class="icon-double-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
